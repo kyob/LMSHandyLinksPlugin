@@ -1,0 +1,58 @@
+{extends file="layout.html"}
+{block name=title}::: LMS :{$layout.pagetitle|striphtml} :::{/block}
+{block name=module_content}
+    <h1>{trans('Handy links')}</h1>
+    {foreach from=$handy_links key=category_name item=items}
+        <div style="float:left;padding:1rem;">
+            <h1 style="background: #{$items.color};padding:0.5rem;">
+                <span style="color: #{$items.color}; mix-blend-mode: difference;">{$category_name}</span>
+            </h1>
+            <ul>
+                {foreach from=$items item=item}
+                    {if $item@first}
+                        {continue}
+                    {/if}
+                    <li>
+                        {if $item['name']}
+                            <a href="{$item['value']}">{$item['name']}
+                            {else}
+                                {trans('no items found for this category')}
+                            {/if}
+                        </a>
+                    </li>
+                {/foreach}
+            </ul>
+        </div>
+    {/foreach}
+    <hr style="clear: both;">
+    <input type="button" value="{t}Support the author with a tip.{/t}" class="btn-donate" onclick="showOrHide('donate');">
+    <div id="donate" class="bg-donate" style="display:none;">
+        <ul>
+            <li>{t}Bitcoin (BTC){/t}: bc1qvwahntcrwjtdp0ntfd0l6kdvdr9d9h6atp6qrr</li>
+            <li>{t}Ethereum (ETH){/t}: 0xEFCd4b066195652a885d916183ffFfeEEd931f40</li>
+        </ul>
+    </div>
+
+<style>
+    .bg-donate {
+        color: black;
+        background: ghostwhite;
+        border: 1px solid gray;
+        padding: 1em;
+    }
+
+    input.btn-donate {
+        color: #333;
+        font-weight: bold;
+        background: #eee;
+        padding: 5px 10px 5px 10px;
+        border: 1px solid gray;
+        text-decoration: none;
+    }
+
+    input.btn-donate:hover {
+        background: #fff;
+        text-decoration: none;
+    }
+</style>
+{/block}

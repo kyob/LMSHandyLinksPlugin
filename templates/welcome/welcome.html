@@ -1,0 +1,39 @@
+{block name="extra-panel" append}
+    <table class="lmsbox" id="lms-ui-welcome-box-handylinks">
+        <thead>
+            <tr onclick="showOrHide('welcome_handylinks');">
+                <th class="text-center bold">
+                    <i class="fas fa-link"></i> {trans('Handy links')}
+                </th>
+            </tr>
+        </thead>
+        <tbody id="welcome_handylinks">
+            <tr>
+                <td>
+                    {foreach from=$handy_links key=category_name item=items}
+                        <div style="float:left;padding:1rem;">
+                            <h1 style="background: #{$items.color};padding:0.5rem;">
+                                <span style="color: #{$items.color}; mix-blend-mode: difference;">{$category_name}</span>
+                            </h1>
+                            <ul>
+                                {foreach from=$items item=item}
+                                    {if $item@first}
+                                        {continue}
+                                    {/if}
+                                    <li>
+                                        {if $item['name']}
+                                            <a href="{$item['value']}">{$item['name']}
+                                            {else}
+                                                {trans('no items found for this category')}
+                                            {/if}
+                                        </a>
+                                    </li>
+                                {/foreach}
+                            </ul>
+                        </div>
+                    {/foreach}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{/block}
